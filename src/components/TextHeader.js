@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
-import { theme } from "../utils/theme";
+import { theme } from "../../utils/theme";
 
 const TextHeader = ({ style, children }) => (
   <Text style={styles.header}>{children}</Text>
@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
     color: theme.colors.primary,
     fontWeight: "bold",
     paddingTop: 16,
-    paddingBottom: 4
-  }
+    paddingBottom: 4,
+  },
 });
 
 export default TextHeader;

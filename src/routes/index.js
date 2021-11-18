@@ -3,40 +3,42 @@ import { createAppContainer } from "react-navigation";
 
 import { Appbar } from "../components";
 
-import { DeckAdd, DeckSingle, CardAdd, Quiz } from "../screens";
+import { AddDeck, SingleDeck, AddCard, Quiz } from "../views";
 import { createStackNavigator } from "react-navigation-stack";
 import NavigationDrawer from "./NavigationDrawer";
 
 const screens = {
-  DeckAdd: {
-    screen: DeckAdd,
-    title: "Add New Deck"
+  AddDeck: {
+    screen: AddDeck,
+    title: "Add New Deck",
   },
-  DeckSingle: {
-    screen: DeckSingle,
-    title: "Deck Single"
+  SingleDeck: {
+    screen: SingleDeck,
+    title: "Deck Single",
   },
-  CardAdd: {
-    screen: CardAdd,
-    title: "Add New Card"
+  AddCard: {
+    screen: AddCard,
+    title: "Add New Card",
   },
   Quiz: {
     screen: Quiz,
-    title: "Quiz"
-  }
+    title: "Quiz",
+  },
 };
 
 const routes = Object.keys(screens)
-  .map(id => ({ id, item: screens[id] }))
+  .map((id) => ({ id, item: screens[id] }))
   .reduce((acc, { id, item }) => {
     const Comp = item.screen;
-    const Screen = props => <Comp {...props} />;
+    const Screen = (props) => <Comp {...props} />;
     Screen.navigationOptions = ({ navigation }) => ({
-      header: <Appbar menu={false} title={item.title} navigation={navigation} />
+      header: (
+        <Appbar menu={false} title={item.title} navigation={navigation} />
+      ),
     });
     return {
       ...acc,
-      [id]: { screen: Screen }
+      [id]: { screen: Screen },
     };
   }, {});
 
@@ -51,13 +53,13 @@ const NavigationStack = createStackNavigator(
             title="Mobile Flashcards"
             navigation={navigation}
           />
-        )
-      })
+        ),
+      }),
     },
-    ...routes
+    ...routes,
   },
   {
-    initialRouteName: "Drawer"
+    initialRouteName: "Drawer",
   }
 );
 

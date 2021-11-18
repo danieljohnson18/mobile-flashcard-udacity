@@ -4,7 +4,7 @@ import { Avatar, Card, Divider, Colors, FAB } from "react-native-paper";
 import Main from "../components/Main";
 import { connect } from "react-redux";
 
-class DeckList extends React.Component {
+class ListDeck extends React.Component {
   state = {
     decks: null
   };
@@ -95,4 +95,4 @@ function mapStateToProps({ decks }) {
   };
 }
 
-export default connect(mapStateToProps)(DeckList);
+export default connect(mapStateToProps)(ListDeck);

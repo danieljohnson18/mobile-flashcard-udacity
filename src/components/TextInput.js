@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { TextInput as Input } from "react-native-paper";
-import { theme } from "../utils/theme";
+import { theme } from "../../utils/theme";
 
 const InputText = ({ errorText, ...props }) => (
   <View style={styles.container}>

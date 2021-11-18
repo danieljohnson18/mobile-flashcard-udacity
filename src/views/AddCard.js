@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {
   StyleSheet,
   ScrollView,
@@ -7,35 +7,32 @@ import {
 } from "react-native";
 import { Card, Colors } from "react-native-paper";
 import Main from "../components/Main";
-import { TextHeader, Button, TextInput } from "../components";
-
+import { Button, TextHeader, TextInput } from "../components";
 import { connect } from "react-redux";
-import { handleAddDecks, resetNewDeckId } from "../store/actions/decks";
+import { handleAddCardToDeck } from "../redux/actions/decks";
 
-class DeckAdd extends React.Component {
-  state = {
-    deckTitle: ""
-  };
-  onAddCreateDeckPress() {
-    if (!this.state.deckTitle) {
-      return alert("Please Enter Deck title");
+class AddCard extends React.Component {
+  onAddCardPress() {
+    const { deckId } = this.props.navigation.state.params;
+    const { question, answer } = this.state;
+    if (!question || !answer) {
+      return alert("Please Enter all the fields");
     }
-    this.props.addDeck(this.state.deckTitle);
+    this.props.addCardToDeck(deckId, {
+      question,
+      answer
+    });
+    this.props.navigation.goBack();
   }
+
+  state = {
+    question: "",
+    answer: ""
+  };
 
   handleChange = name => value => {
     this.setState({ [name]: value });
   };
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.newDeckId !== this.props.newDeckId) {
-      this.props.navigation.navigate("DeckSingle", {
-        deckId: nextProps.newDeckId,
-        title: this.state.deckTitle
-      });
-      this.setState({ deckTitle: "" });
-    }
-  }
 
   render() {
     return (
@@ -45,21 +42,28 @@ class DeckAdd extends React.Component {
             <KeyboardAvoidingView behavior="padding">
               <Card style={styles.card}>
                 <Card.Content style={styles.cardContent}>
-                  <TextHeader>What is the title of your new deck?</TextHeader>
+                  <TextHeader>What is the title of your card?</TextHeader>
                   <TextInput
-                    label="Deck Title"
+                    label="Question"
                     returnKeyType="done"
-                    onChangeText={this.handleChange("deckTitle")}
+                    onChangeText={this.handleChange("question")}
+                    autoCapitalize="sentences"
+                  />
+                  <TextHeader>What is the answer of your card?</TextHeader>
+                  <TextInput
+                    label="Answer"
+                    returnKeyType="done"
+                    onChangeText={this.handleChange("answer")}
                     autoCapitalize="sentences"
                   />
                 </Card.Content>
                 <Card.Actions>
                   <Button
                     mode="contained"
-                    onPress={() => this.onAddCreateDeckPress()}
                     style={styles.button}
+                    onPress={() => this.onAddCardPress()}
                   >
-                    Create New Deck
+                    Add New Card
                   </Button>
                 </Card.Actions>
               </Card>
@@ -71,24 +75,15 @@ class DeckAdd extends React.Component {
   }
 }
 
-function mapStateToProps({ newDeckId }) {
-  return {
-    newDeckId: newDeckId.newDeckId
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
-    addDeck: deckTitle => {
-      dispatch(handleAddDecks(deckTitle));
-    },
-    resetNewDeckId: () => {
-      dispatch(resetNewDeckId());
+    addCardToDeck: (deckId, card) => {
+      dispatch(handleAddCardToDeck(deckId, card));
     }
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeckAdd);
+export default connect(null, mapDispatchToProps)(AddCard);
 
 const styles = StyleSheet.create({
   container: {

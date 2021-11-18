@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyleSheet, SafeAreaView, View } from "react-native";
 import { connect } from "react-redux";
-import { handleGetAllDecks } from "../store/actions/decks";
+import { handleGetAllDecks } from "../redux/actions/decks";
 
 // const Main = ({ children }) => (
 //   <SafeAreaView style={styles.container}>

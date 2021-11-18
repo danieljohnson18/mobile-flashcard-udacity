@@ -3,22 +3,22 @@ import { StyleSheet, View } from "react-native";
 import { Button as PaperButton, Colors } from "react-native-paper";
 import { Main, TextHeader, Paragraph, Button } from "../components";
 import { connect } from "react-redux";
-import { handleDeleteDeck } from "../store/actions/decks";
+import { handleDeleteDeck } from "../redux/actions/decks";
 
-class DeckSingle extends React.Component {
+class SingleDeck extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
   };
 
   onAddCardPress(id) {
     this.props.navigation.navigate("CardAdd", {
-      deckId: id
+      deckId: id,
     });
   }
 
   onStartQuizPress(id) {
     this.props.navigation.navigate("Quiz", {
-      deckId: id
+      deckId: id,
     });
   }
 
@@ -82,27 +82,27 @@ const styles = StyleSheet.create({
     maxWidth: 340,
     alignSelf: "center",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   buttonDeleteDeckLabel: {
     color: Colors.red500,
-    textTransform: "none"
-  }
+    textTransform: "none",
+  },
 });
 
 function mapStateToProps({ decks }, props) {
   const { deckId } = props.navigation.state.params;
   return {
-    deck: decks[deckId]
+    deck: decks[deckId],
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteDeck: deckId => {
+    deleteDeck: (deckId) => {
       dispatch(handleDeleteDeck(deckId));
-    }
+    },
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeckSingle);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleDeck);

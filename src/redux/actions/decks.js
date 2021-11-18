@@ -2,8 +2,8 @@ import {
   getDecks,
   saveDeckTitle,
   saveCardToDeck,
-  removeDeck
-} from "../../utils/api";
+  removeDeck,
+} from "../../../utils/api";
 
 export const GET_ALL_DECKS = "GET_ALL_DECKS";
 export const ADD_DECK = "ADD_DECK";
@@ -12,23 +12,23 @@ export const DELETE_DECK = "DELETE_DECK";
 export const RESET_NEW_DECK_ID = "RESET_NEW_DECK_ID";
 
 export function handleGetAllDecks() {
-  return dispatch => {
-    return getDecks().then(decks => {
+  return (dispatch) => {
+    return getDecks().then((decks) => {
       dispatch(getAllDecks(decks));
     });
   };
 }
 
 export function handleAddDecks(deckTitle) {
-  return dispatch => {
-    return saveDeckTitle(deckTitle).then(deck => {
+  return (dispatch) => {
+    return saveDeckTitle(deckTitle).then((deck) => {
       dispatch(addDeck(deck));
     });
   };
 }
 
 export function handleAddCardToDeck(deckId, card) {
-  return dispatch => {
+  return (dispatch) => {
     return saveCardToDeck(deckId, card).then(() => {
       dispatch(addCardToDeck(deckId, card));
     });
@@ -36,7 +36,7 @@ export function handleAddCardToDeck(deckId, card) {
 }
 
 export function handleDeleteDeck(deckId) {
-  return dispatch => {
+  return (dispatch) => {
     return removeDeck(deckId).then(() => {
       dispatch(deleteDeck(deckId));
     });
@@ -46,14 +46,14 @@ export function handleDeleteDeck(deckId) {
 export function getAllDecks(decks) {
   return {
     type: GET_ALL_DECKS,
-    decks
+    decks,
   };
 }
 
 export function addDeck(deck) {
   return {
     type: ADD_DECK,
-    deck
+    deck,
   };
 }
 
@@ -61,19 +61,19 @@ export function addCardToDeck(deckId, card) {
   return {
     type: ADD_CARD_TO_DECK,
     deckId,
-    card
+    card,
   };
 }
 
 export function deleteDeck(deckId) {
   return {
     type: DELETE_DECK,
-    deckId
+    deckId,
   };
 }
 
 export function resetNewDeckId() {
   return {
-    type: RESET_NEW_DECK_ID
+    type: RESET_NEW_DECK_ID,
   };
 }

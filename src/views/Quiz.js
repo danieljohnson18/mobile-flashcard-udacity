@@ -8,8 +8,8 @@ import { Colors, FAB, Text } from "react-native-paper";
 import { Main, Button, TextHeader, Paragraph } from "../components";
 import CardFlip from "react-native-card-flip";
 import { connect } from "react-redux";
-import { handleDeleteDeck } from "../store/actions/decks";
-import { clearLocalNotification, setLocalNotification } from "../utils/helper";
+import { handleDeleteDeck } from "../redux/actions/decks";
+import { clearLocalNotification, setLocalNotification } from "../../utils/helper";
 
 class Quiz extends React.Component {
   state = {

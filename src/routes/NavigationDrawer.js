@@ -2,36 +2,36 @@ import React from "react";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { Dimensions } from "react-native";
 import { Drawer } from "../components";
-import { DeckList, DeckAdd } from "../screens";
+import { ListDeck, DeckAdd } from "../views";
 
 const screens = {
-  DeckList: {
-    screen: DeckList,
-    title: "Deck List"
-  }
+  ListDeck: {
+    screen: ListDeck,
+    title: "Deck List",
+  },
 };
 
 const routes = Object.keys(screens)
-  .map(id => ({ id, item: screens[id] }))
+  .map((id) => ({ id, item: screens[id] }))
   .reduce((acc, { id, item }) => {
     const Comp = item.screen;
-    const Screen = props => <Comp {...props} />;
+    const Screen = (props) => <Comp {...props} />;
     Screen.navigationOptions = ({ navigation }) => ({
-      drawerLabel: item.title
+      drawerLabel: item.title,
     });
     return {
       ...acc,
-      [id]: { screen: Screen }
+      [id]: { screen: Screen },
     };
   }, {});
 
 const NavigationDrawer = createDrawerNavigator(
   {
-    ...routes
+    ...routes,
   },
   {
-    contentComponent: props => <Drawer {...props} />,
-    initialRouteName: "DeckList",
+    contentComponent: (props) => <Drawer {...props} />,
+    initialRouteName: "ListDeck",
     drawerWidth: Dimensions.get("window").width * 0.85,
     hideStatusBar: false,
     contentOptions: {
@@ -39,12 +39,12 @@ const NavigationDrawer = createDrawerNavigator(
       activeTintColor: "#53115B",
       itemsContainerStyle: {
         marginTop: 8,
-        marginHorizontal: 8
+        marginHorizontal: 8,
       },
       itemStyle: {
-        borderRadius: 4
-      }
-    }
+        borderRadius: 4,
+      },
+    },
   }
 );
 
