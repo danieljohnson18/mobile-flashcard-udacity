@@ -2,7 +2,7 @@ Project: Udacity React Nanodegree Project 3: Mobile Flashcards.
 
 Description.
 
-Mobile Flashcards is an app that helps you study. For each subject or category you are studying, you create a deck. Each deck (category) will contain questions (cards) you want to asnwer.
+Mobile Flashcards is an app that helps you study. For each subject or category you are studying, you create a deck. Each deck (category) will contain questions (cards) you want to answer.
 
 The app comprises of "Decks" containing "Cards". Each deck you create will contain questions (cards) for a particular category (deck). For each card you create a question and an answer.
 
